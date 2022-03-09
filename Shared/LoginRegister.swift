@@ -16,6 +16,7 @@ struct LoginRegister: View {
     @AppStorage("admin") var adminLoggedIn: Bool = false
     
     @ObservedObject var customerService = CustomerService()
+    @ObservedObject var insertThisCustomer = InsertCustomerService()
     
     //This is an integer for tracking the Picker at the top of the View. When = 0 for login, the user is using email[0] and password[0] which is used in a GET query to compare existing database entries. When = 1 for register, the user is in email[1] and password[1] which is used for a POST query to add a new entry.
     @State var loginOrRegister: Int = 0
@@ -46,7 +47,7 @@ struct LoginRegister: View {
                     Text("Name")
                         .padding()
                         .frame(width:140, alignment: .leading)
-                    TextField("name", text: $password[loginOrRegister])
+                    TextField("name", text: $name[1])
                         .padding()
                 }
             }
@@ -73,7 +74,7 @@ struct LoginRegister: View {
                     Text("Phone")
                         .padding()
                         .frame(width:140, alignment: .leading)
-                    TextField("password", text: $password[loginOrRegister])
+                    TextField("password", text: $phone[1])
                         .padding()
                 }
             }
@@ -90,16 +91,33 @@ struct LoginRegister: View {
             //        .foregroundColor(Color.red)
             //}
             Spacer()
-            Button { checkLogin() } label: {
-                Text("Log In")
-                    .padding()
-                    .foregroundColor(Color.white)
+            if(loginOrRegister==0) {
+                Button { checkLogin() } label: {
+                    Text("Log In")
+                        .padding()
+                        .foregroundColor(Color.white)
+                }
+                .background(Color.blue)
+                .buttonStyle(PlainButtonStyle())
+                .cornerRadius(8)
+                //.frame(width: 300) this doesn't seem to do anything thanks swiftUI.
+                .padding()
+            } else if(loginOrRegister==1) {
+                Button { registerCustomer(phone[1],email[1],password[1]) } label: {
+                    Text("Register")
+                        .padding()
+                        .foregroundColor(Color.white)
+                }
+                .background(Color.blue)
+                .buttonStyle(PlainButtonStyle())
+                .cornerRadius(8)
+                //.frame(width: 300) this doesn't seem to do anything thanks swiftUI.
+                .padding()
+                if(valid == 1) {
+                    Text("Register successful!")
+                        .foregroundColor(.green)
+                }
             }
-            .background(Color.blue)
-            .buttonStyle(PlainButtonStyle())
-            .cornerRadius(8)
-            //.frame(width: 300) this doesn't seem to do anything thanks swiftUI.
-            .padding()
             VStack {
                 Text("Are you an administrator? ")
                 NavigationLink(destination: adminLogIn()) {
@@ -140,6 +158,10 @@ struct LoginRegister: View {
                 NavigationLink("ContentView", destination: ContentView(emailLoggedIn: emailLoggedIn, passwordLoggedIn: passwordLoggedIn, loggedIn: loggedIn, adminLoggedIn: adminLoggedIn))
             }
         }
+    }
+    private func registerCustomer(_ phone: String, _ email: String, _ password: String) {
+        valid = insertThisCustomer.getCustomers(phone,email,password)
+        
     }
 }
 

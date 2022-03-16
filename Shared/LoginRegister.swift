@@ -12,6 +12,7 @@ struct LoginRegister: View {
     
     @AppStorage("email") var emailLoggedIn: String = ""
     @AppStorage("password") var passwordLoggedIn: String = ""
+    @AppStorage("customerID") var customerID: Int = 0
     @AppStorage("loggedIn") var loggedIn: Bool = false
     @AppStorage("admin") var adminLoggedIn: Bool = false
     
@@ -153,9 +154,10 @@ struct LoginRegister: View {
             if (valid == 1) {
                 emailLoggedIn = email[0]
                 passwordLoggedIn = customerService.customers[0].password
+                customerID = customerService.customers[0].id
                 loggedIn = true
                 adminLoggedIn = false
-                NavigationLink("ContentView", destination: ContentView(emailLoggedIn: emailLoggedIn, passwordLoggedIn: passwordLoggedIn, loggedIn: loggedIn, adminLoggedIn: adminLoggedIn))
+                NavigationLink("ContentView", destination: ContentView(emailLoggedIn: emailLoggedIn, passwordLoggedIn: passwordLoggedIn, customerID: customerID, loggedIn: loggedIn, adminLoggedIn: adminLoggedIn))
             }
         }
     }

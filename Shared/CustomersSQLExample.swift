@@ -27,6 +27,15 @@ struct Admin: Decodable, Identifiable {
     var minTimes: Int!
     var standardRates: Int!
 }
+struct Stop: Decodable, Identifiable {
+    var id: Int //jobID in the database
+    var which: Int!
+    var line1: String!
+    var line2: String!
+    var line3: String!
+    var type: Int!
+    var floor: Int!
+}
 
 class CustomerService: ObservableObject {
     @Published var errorMessage: String = ""
@@ -112,6 +121,37 @@ class CustomerService: ObservableObject {
             return 2
         }
     }
+    
+    func getID(_ email: String) -> Int {
+        let urlstring = "http://frankcmps490sp22.cmix.louisiana.edu/login.php"
+        let url = URL(string: urlstring)!
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "GET"
+        let postString = "email=\(email)"
+        urlRequest.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared
+            .dataTaskPublisher(for: urlRequest)
+            .map(\.data)
+            .decode(type: [Customer].self, decoder: JSONDecoder())
+            .receive(on: RunLoop.main)
+            .sink {completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: {
+                self.customers.removeAll()
+                self.customers = $0
+            }.store(in: &cancellableSet)
+        if (errorMessage != "" && customers.count > 0) {
+            return customers[0].id
+        }
+        return 0
+    }
 }
 
 class AdminService: ObservableObject {
@@ -142,6 +182,44 @@ class AdminService: ObservableObject {
                 //returnVal = self.customers[0].password ?? ""
             }.store(in: &cancellableSet)
         //return returnVal
+    }
+}
+
+class StopsService: ObservableObject {
+    @Published var errorMessage: String = ""
+    @Published var stops: [Stop] = []
+    private var cancellableSet: Set<AnyCancellable> = []
+    
+    func insertStop(_ jobID: Int, _ which: Int, _ line1: String, _ line2: String, _ line3: String, _ type: Int, _ floor: Int) -> Int {
+        let urlstring = "http://frankcmps490sp22.cmix.louisiana.edu/insertJob.php"
+        let url = URL(string: urlstring)!
+        
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "Post"
+        let postString = "jobID=\(jobID) & which=\(which) & line1=\(line1) & line2=\(line2) & line3=\(line3) & type=\(type) & floor=\(floor)"
+        urlRequest.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared
+            .dataTaskPublisher(for: urlRequest)
+            .map(\.data)
+            .decode(type: [Stop].self, decoder: JSONDecoder())
+            .receive(on: RunLoop.main)
+            .sink {completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                }
+            } receiveValue: {
+                self.stops.removeAll()
+                self.stops = $0
+            }.store(in: &cancellableSet)
+        if (errorMessage == "") {
+            return 1
+        } else {
+            return 2
+        }
     }
 }
 
@@ -186,10 +264,10 @@ class JobService: ObservableObject {
                 self.jobs.removeAll()
                 self.jobs = $0
             }.store(in: &cancellableSet)
-        if (errorMessage == "") {
-            return 1
+        if (errorMessage == "" && jobs.count > 0) {
+            return jobs[0].id
         } else {
-            return 2
+            return 0
         }
     }
 }

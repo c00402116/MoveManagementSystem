@@ -12,6 +12,7 @@ struct ContentView: View {
     
     @AppStorage("email") var emailLoggedIn: String = ""
     @AppStorage("password") var passwordLoggedIn: String = ""
+    @AppStorage("customerID") var customerID: Int = 0
     @AppStorage("loggedIn") var loggedIn: Bool = false
     @AppStorage("admin") var adminLoggedIn: Bool = false
     
@@ -26,7 +27,7 @@ struct ContentView: View {
         
         NavigationView {
             VStack {
-                NavigationLink(destination: PreliminarySurvey()) {
+                NavigationLink(destination: PreliminarySurvey(emailLoggedIn: emailLoggedIn, passwordLoggedIn: passwordLoggedIn, customerID: customerID, loggedIn: loggedIn, address1: "", address2: "", address3: "", type: 0, floor: 1)) {
                     Button(action: {}) {
                         Text("Begin Free Preliminary Survey")
                             .padding()

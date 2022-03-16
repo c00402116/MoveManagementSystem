@@ -70,7 +70,7 @@ struct PreliminarySurvey: View {
                                 .italic()
                                 .padding()
                         } else if (address1 != "" && address2 == "") {
-                            Text("\(address1)\n(\(address3)")
+                            Text("\(address1)\n\(address3)")
                                 .foregroundColor(Color.white)
                                 .padding()
                         } else if (address1 != "" && address2 != "") {
@@ -123,6 +123,15 @@ struct PreliminarySurvey: View {
                         Spacer()
                         Text("\(distance) meters")
                             .onChange(of: address1) { _ in
+                                distance = getDistance(address1, address3, address1dest, address3dest)
+                            }
+                            .onChange(of: address3) { _ in
+                                distance = getDistance(address1, address3, address1dest, address3dest)
+                            }
+                            .onChange(of: address1dest) { _ in
+                                distance = getDistance(address1, address3, address1dest, address3dest)
+                            }
+                            .onChange(of: address3dest) { _ in
                                 distance = getDistance(address1, address3, address1dest, address3dest)
                             }
                     }
@@ -184,6 +193,9 @@ struct PreliminarySurvey: View {
     }
     
     public func getDistance(_ address1: String, _ address3: String, _ address1dest: String, _ address3dest: String) -> Double {
+        debugPrint("\(address1), \(address3)")
+        debugPrint("\(address1dest), \(address3dest)")
+        
         let orig = address1 + ", " + address3
         let dest = address1dest + ", " + address3dest
         

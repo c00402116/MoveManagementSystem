@@ -121,18 +121,24 @@ struct PreliminarySurvey: View {
                             .font(.system(size: 28))
                             .padding()
                         Spacer()
-                        Text("\(distance) meters")
+                        Text("\((distance/1000), specifier:"%.1f") km")
+                            .foregroundColor(Color.white)
+                            .padding()
                             .onChange(of: address1) { _ in
-                                distance = getDistance(address1, address3, address1dest, address3dest)
+                                debugPrint(address1, address3, address1dest, address3dest)
+                                getDistance(address1, address3, address1dest, address3dest)
                             }
                             .onChange(of: address3) { _ in
-                                distance = getDistance(address1, address3, address1dest, address3dest)
+                                debugPrint(address1, address3, address1dest, address3dest)
+                                getDistance(address1, address3, address1dest, address3dest)
                             }
                             .onChange(of: address1dest) { _ in
-                                distance = getDistance(address1, address3, address1dest, address3dest)
+                                debugPrint(address1, address3, address1dest, address3dest)
+                                getDistance(address1, address3, address1dest, address3dest)
                             }
                             .onChange(of: address3dest) { _ in
-                                distance = getDistance(address1, address3, address1dest, address3dest)
+                                debugPrint(address1, address3, address1dest, address3dest)
+                                getDistance(address1, address3, address1dest, address3dest)
                             }
                     }
                     HStack {
@@ -192,7 +198,7 @@ struct PreliminarySurvey: View {
         }
     }
     
-    public func getDistance(_ address1: String, _ address3: String, _ address1dest: String, _ address3dest: String) -> Double {
+    public func getDistance(_ address1: String, _ address3: String, _ address1dest: String, _ address3dest: String) -> Void {
         debugPrint("\(address1), \(address3)")
         debugPrint("\(address1dest), \(address3dest)")
         
@@ -208,6 +214,8 @@ struct PreliminarySurvey: View {
         var coordinate1 = CLLocation()
         
         let geocoder = CLGeocoder()
+        var distanceInMeters: Double = 0.0
+   
         geocoder.geocodeAddressString(orig) {
             placemarks, error in
             let placemark = placemarks?.first
@@ -216,13 +224,8 @@ struct PreliminarySurvey: View {
             lat1 = (Double)(lat!)
             lon1 = (Double)(lon!)
         }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            debugPrint(lat1, lon1)
-            coordinate0 = CLLocation(latitude: lat1, longitude: lon1)
-        }
-        
-        geocoder.geocodeAddressString(dest) {
+        let geocoder2 = CLGeocoder()
+        geocoder2.geocodeAddressString(dest) {
             placemarks, error in
             let placemark = placemarks?.first
             let lat = placemark?.location?.coordinate.latitude
@@ -232,13 +235,14 @@ struct PreliminarySurvey: View {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-            debugPrint(lat2, lon2)
+            debugPrint(lat1, lon1, lat2, lon2)
+            coordinate0 = CLLocation(latitude: lat1, longitude: lon1)
             coordinate1 = CLLocation(latitude: lat2, longitude: lon2)
+            
+            distanceInMeters = coordinate0.distance(from: coordinate1)
+            debugPrint(distanceInMeters)
+            distance = (Double)(distanceInMeters)
         }
-        
-        let distanceInMeters = coordinate0.distance(from: coordinate1)
-        
-        return (Double)(distanceInMeters)
     }
     
     public func getEstimates() -> Int {

@@ -184,7 +184,7 @@ struct PreliminarySurvey: View {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurniture()) {
+                        NavigationLink(destination: selectFurnitureDest()) {
                             Image(systemName: "chevron.down")
                                 .foregroundColor(Color.white)
                         }

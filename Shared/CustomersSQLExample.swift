@@ -37,6 +37,14 @@ struct Stop: Decodable, Identifiable {
     var floor: Int!
 }
 
+struct Furniture: Decodable, Identifiable {
+    var id: Int
+    var name: String!
+    var weight: Int!
+    
+    
+}
+
 class CustomerService: ObservableObject {
     @Published var errorMessage: String = ""
     @Published var customers: [Customer] = []
@@ -220,6 +228,35 @@ class StopsService: ObservableObject {
         } else {
             return 2
         }
+    }
+}
+
+class FurnitureService: ObservableObject {
+    @Published var errorMessage: String = ""
+    @Published var furniture: [Furniture] = []
+    private var cancellableSet: Set<AnyCancellable> = []
+    
+    func downloadFurniture() {
+        let urlstring = "http://frankcmps490sp22.cmix.louisiana.edu/getFurniture.php"
+        let url = URL(string: urlstring)!
+        
+        URLSession.shared
+            .dataTaskPublisher(for: URLRequest(url: url))
+            .map(\.data)
+            .decode(type: [Furniture].self, decoder: JSONDecoder())
+            .receive(on: RunLoop.main)
+            .sink { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    print(error)
+                }
+            } receiveValue: {
+                self.furniture.removeAll()
+                self.furniture = $0
+            }.store(in: &cancellableSet)
     }
 }
 

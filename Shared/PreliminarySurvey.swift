@@ -18,6 +18,7 @@ struct PreliminarySurvey: View {
     @ObservedObject var jobService = JobService()
     @ObservedObject var customerService = CustomerService()
     @ObservedObject var stopsService = StopsService()
+    @ObservedObject var furnitureService = FurnitureService()
     
     @State var addJobSuccess: Int = 0
     @State var addStopSuccess: Int = 0
@@ -99,8 +100,10 @@ struct PreliminarySurvey: View {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        Image(systemName: "chevron.down")
-                            .foregroundColor(Color.white)
+                        NavigationLink(destination: selectFurniture()) {
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(Color.white)
+                        }
                         Spacer()
                         NavigationLink(destination: editAddressView(origOrDest: origOrDest)) {
                             Text("Edit")
@@ -181,8 +184,10 @@ struct PreliminarySurvey: View {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        Image(systemName: "chevron.down")
-                            .foregroundColor(Color.white)
+                        NavigationLink(destination: selectFurniture()) {
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(Color.white)
+                        }
                         Spacer()
                         NavigationLink(destination: editAddressView(origOrDest: !origOrDest)) {
                             Text("Edit")

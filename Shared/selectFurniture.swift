@@ -8,16 +8,37 @@
 import SwiftUI
 
 struct selectFurniture: View {
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var furnitureService = FurnitureService()
     var body: some View {
         NavigationView {
-            ForEach(furnitureService.furniture) { piece in
-                Text("\(piece.name), \(piece.weight)")
-            }
-        }.onAppear(perform: {
-            furnitureService.downloadFurniture()
-        })
+            List{
+                Text("Furniture List")
+                    .font(.largeTitle)
+                ForEach(furnitureService.furniture) { piece in
+                    Text("\(piece.name), Weight: \(piece.weight)")
+                }
+            }.navigationBarItems(leading: backButton)
+        }.navigationBarHidden(true)
+            //.navigationTitle("Furniture List")
+            .navigationViewStyle(.stack)
+            .onAppear(perform: {
+                furnitureService.downloadFurniture()
+            })
     }
+    
+    
+    
+    var backButton: some View {
+            Button(action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }, label: {
+                HStack {
+                    Image(systemName: "chevron.left")
+                    Text("Back") // 2
+                }
+            })
+        }
 }
 
 struct selectFurniture_Previews: PreviewProvider {

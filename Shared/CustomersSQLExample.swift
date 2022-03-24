@@ -42,7 +42,12 @@ struct Furniture: Decodable, Identifiable {
     var name: String!
     var weight: Int!
     
-    
+    enum CodingKeys: String,CodingKey {
+        case id = "furnitureID"
+        case name = "name"
+        case weight = "weight"
+        
+    }
 }
 
 class CustomerService: ObservableObject {

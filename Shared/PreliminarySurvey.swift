@@ -26,6 +26,10 @@ struct PreliminarySurvey: View {
     @State var origAddrDisabled: Bool = true
     @State var showOrigItems: Bool = false
     @State var origOrDest: Bool = true
+    
+    @State var furnitureSelectedOrig = Set<String>()
+    @State var furnitureSelectedDest = Set<String>()
+    
     //passes true to editPrelimSurvey.swift if you click edit on ORIGIN
     //passes false if you click on edit DESTINATION
     
@@ -40,6 +44,10 @@ struct PreliminarySurvey: View {
     @AppStorage("address3dest") var address3dest: String = ""
     @AppStorage("typeDest") var typeDest: Int = 0
     @AppStorage("floorDest") var floorDest: Int = 1
+    
+    @AppStorage("totalWeightOrig") var totalWeightOrig : Int = 0
+    @AppStorage("totalWeightDest") var totalWeightDest : Int = 0
+    @AppStorage("totalWeight") var totalWeight : Int = 0
     
     @State var distance: Double = 0.0
     
@@ -100,10 +108,12 @@ struct PreliminarySurvey: View {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurniture()) {
-                            Image(systemName: "chevron.down")
+                        NavigationLink(destination: selectFurniture(furnitureSelectedOrig: furnitureSelectedOrig)) {
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
+                        //Text("**\(totalWeightOrig)** lbs.")
+                        //    .foregroundColor(Color.white)
                         Spacer()
                         NavigationLink(destination: editAddressView(origOrDest: origOrDest)) {
                             Text("Edit")
@@ -184,10 +194,12 @@ struct PreliminarySurvey: View {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurnitureDest()) {
-                            Image(systemName: "chevron.down")
+                        NavigationLink(destination: selectFurnitureDest(furnitureSelectedDest: furnitureSelectedDest)) {
+                            Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
+                        //Text("**\(totalWeightDest)** lbs.")
+                        //    .foregroundColor(Color.white)
                         Spacer()
                         NavigationLink(destination: editAddressView(origOrDest: !origOrDest)) {
                             Text("Edit")
@@ -220,7 +232,7 @@ struct PreliminarySurvey: View {
         
         let geocoder = CLGeocoder()
         var distanceInMeters: Double = 0.0
-   
+        
         geocoder.geocodeAddressString(orig) {
             placemarks, error in
             let placemark = placemarks?.first
@@ -268,7 +280,7 @@ struct editAddressView: View {
     @AppStorage("address2") var address2: String = ""
     @AppStorage("address3") var address3: String = ""
     @AppStorage("type") var type: Int = 0
-
+    
     
     @AppStorage("address1dest") var address1dest: String = ""
     @AppStorage("address2dest") var address2dest: String = ""
@@ -276,84 +288,99 @@ struct editAddressView: View {
     @AppStorage("typeDest") var typeDest: Int = 0
     
     var typeOptions: [String] = ["Residential Home", "Apartment Complex", "Business"]
-
+    
     
     var body: some View {
         ScrollView {
             if (origOrDest) {
                 Section {
-                    HStack {
-                        Text("Street")
-                            .foregroundColor(Color.white)
-                        TextField("Street Adress", text: $address1)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("Apt/Suite")
-                            .foregroundColor(Color.white)
-                        TextField("Apt/Suite", text: $address2)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("City/State")
-                            .foregroundColor(Color.white)
-                        TextField("City/State", text: $address3)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("Residence Type")
-                            .foregroundColor(Color.white)
-                            .padding()
-                        Spacer()
-                        Picker("", selection: $type) {
-                            ForEach(0..<typeOptions.count) { option in
-                                Text("\(typeOptions[option])")
-                            }
+                    VStack {
+                        HStack {
+                            Text("Street")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Street Adress", text: $address1)
+                                .frame(width: 280)
+                                .padding()
                         }
-                        .padding()
+                        HStack {
+                            Text("Apt/Suite")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Apt/Suite", text: $address2)
+                                .frame(width: 280)
+                                .padding()
+                        }
+                        HStack {
+                            Text("City/State")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("City/State", text: $address3)
+                                .frame(width: 280)
+                                .padding()
+                        }
+                        HStack {
+                            Text("Residence Type")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            Spacer()
+                            Picker("", selection: $type) {
+                                ForEach(0..<typeOptions.count) { option in
+                                    Text("\(typeOptions[option])")
+                                }
+                            }
+                            .padding()
+                        }
                     }
-
                 }
-                .background(Color.green)
+                .foregroundColor(Color.green)
                 .cornerRadius(8)
                 .padding()
             }
             if (!origOrDest) {
                 Section {
-                    HStack {
-                        Text("Street")
-                            .foregroundColor(Color.white)
-                        TextField("Street Adress", text: $address1dest)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("Apt/Suite")
-                            .foregroundColor(Color.white)
-                        TextField("Apt/Suite", text: $address2dest)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("City/State")
-                            .foregroundColor(Color.white)
-                        TextField("City/State", text: $address3dest)
-                            .frame(width: 280)
-                    }
-                    HStack {
-                        Text("Residence Type")
-                            .foregroundColor(Color.white)
-                            .padding()
-                        Spacer()
-                        Picker("", selection: $typeDest) {
-                            ForEach(0..<typeOptions.count) { option in
-                                Text("\(typeOptions[option])")
-                            }
+                    VStack {
+                        HStack {
+                            Text("Street")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Street Adress", text: $address1dest)
+                                .frame(width: 280)
+                                .padding()
                         }
-                        .padding()
+                        HStack {
+                            Text("Apt/Suite")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Apt/Suite", text: $address2dest)
+                                .frame(width: 280)
+                                .padding()
+                        }
+                        HStack {
+                            Text("City/State")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("City/State", text: $address3dest)
+                                .frame(width: 280)
+                                .padding()
+                        }
+                        HStack {
+                            Text("Residence Type")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            Spacer()
+                            Picker("", selection: $typeDest) {
+                                ForEach(0..<typeOptions.count) { option in
+                                    Text("\(typeOptions[option])")
+                                }
+                            }
+                            .padding()
+                        }
                     }
-
-                    
                 }
                 .background(Color.red)
+                .cornerRadius(8)
+                .padding()
             }
         }
     }

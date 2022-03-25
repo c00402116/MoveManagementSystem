@@ -10,7 +10,7 @@ import SwiftUI
 struct selectFurniture: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var furnitureService = FurnitureService()
-    @State var furnitureSelected = Set<String>()
+    @State var furnitureSelectedOrig = Set<String>()
     //@State var weightAccumulated: Int = 0
     @AppStorage("totalWeightOrig") var totalWeightOrig : Int = 0
     @AppStorage("totalWeightDest") var totalWeightDest : Int = 0
@@ -24,29 +24,35 @@ struct selectFurniture: View {
     // furniture selected with the option to delete duplicates if necessary?
     var body: some View {
         NavigationView {
-            List(self.furnitureService.furniture, selection: $furnitureSelected){ type in
+            List(self.furnitureService.furniture, selection: $furnitureSelectedOrig){ type in
                 /*ForEach(furnitureService.furniture) { piece in
-                    Text("\(piece.name), Weight: \(piece.weight)")
-                }*/
+                 Text("\(piece.name), Weight: \(piece.weight)")
+                 }*/
                 
-                Text("\(type.name), Weight: \(type.weight)")
-                    .onTapGesture {
-                        if self.furnitureSelected.contains(type.name) {
-                            self.furnitureSelected.remove(type.name)
-                            self.totalWeightOrig -= type.weight
-                        } else {
-                            self.furnitureSelected.insert(type.name)
-                            self.totalWeightOrig += type.weight
+                HStack {
+                    Image(systemName: "checkmark")
+                        .foregroundColor(furnitureSelectedOrig.contains(type.name) ? Color.black : Color.white)
+                    
+                    Text("\(type.name), Weight: \(type.weight)")
+                        .onTapGesture {
+                            if self.furnitureSelectedOrig.contains(type.name) {
+                                self.furnitureSelectedOrig.remove(type.name)
+                                self.totalWeightOrig -= type.weight
+                            } else {
+                                self.furnitureSelectedOrig.insert(type.name)
+                                self.totalWeightOrig += type.weight
+                            }
                         }
-                    }
+                }
             }
             .navigationBarItems(trailing: backButton)
             .navigationBarItems(leading: titleView)
         }.navigationBarHidden(true)
-            //.navigationBarTitle("Furniture List")
+        //.navigationBarTitle("Furniture List")
             .navigationViewStyle(.stack)
             .onAppear(perform: {
                 furnitureService.downloadFurniture()
+                debugPrint(furnitureSelectedOrig)
             })
         HStack {
             Text("Total Weight(Origin): \(totalWeightOrig)")
@@ -62,15 +68,15 @@ struct selectFurniture: View {
     
     
     var backButton: some View {
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                    Text("Back") // 2
-                }
-            })
-        }
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }, label: {
+            HStack {
+                Image(systemName: "chevron.left")
+                Text("Back") // 2
+            }
+        })
+    }
     var titleView: some View {
         Text("Furniture List")
             .font(.largeTitle)
@@ -80,26 +86,26 @@ struct selectFurniture: View {
 struct selectFurnitureDest: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @ObservedObject var furnitureService = FurnitureService()
-    @State var furnitureSelected = Set<String>()
+    @State var furnitureSelectedDest = Set<String>()
     //@State var weightAccumulated: Int = 0
     @AppStorage("totalWeightOrig") var totalWeightOrig : Int = 0
     @AppStorage("totalWeightDest") var totalWeightDest : Int = 0
     @AppStorage("totalWeight") var totalWeight : Int = 0
- 
+    
     var body: some View {
         NavigationView {
-            List(self.furnitureService.furniture, selection: $furnitureSelected){ type in
+            List(self.furnitureService.furniture, selection: $furnitureSelectedDest){ type in
                 /*ForEach(furnitureService.furniture) { piece in
-                    Text("\(piece.name), Weight: \(piece.weight)")
-                }*/
+                 Text("\(piece.name), Weight: \(piece.weight)")
+                 }*/
                 
                 Text("\(type.name), Weight: \(type.weight)")
                     .onTapGesture {
-                        if self.furnitureSelected.contains(type.name) {
-                            self.furnitureSelected.remove(type.name)
+                        if self.furnitureSelectedDest.contains(type.name) {
+                            self.furnitureSelectedDest.remove(type.name)
                             self.totalWeightDest -= type.weight
                         } else {
-                            self.furnitureSelected.insert(type.name)
+                            self.furnitureSelectedDest.insert(type.name)
                             self.totalWeightDest += type.weight
                         }
                     }
@@ -107,7 +113,7 @@ struct selectFurnitureDest: View {
             .navigationBarItems(trailing: backButton)
             .navigationBarItems(leading: titleView)
         }.navigationBarHidden(true)
-            //.navigationBarTitle("Furniture List")
+        //.navigationBarTitle("Furniture List")
             .navigationViewStyle(.stack)
             .onAppear(perform: {
                 furnitureService.downloadFurniture()
@@ -126,15 +132,15 @@ struct selectFurnitureDest: View {
     
     
     var backButton: some View {
-            Button(action: {
-                self.presentationMode.wrappedValue.dismiss()
-            }, label: {
-                HStack {
-                    Image(systemName: "chevron.left")
-                    Text("Back") // 2
-                }
-            })
-        }
+        Button(action: {
+            self.presentationMode.wrappedValue.dismiss()
+        }, label: {
+            HStack {
+                Image(systemName: "chevron.left")
+                Text("Back") // 2
+            }
+        })
+    }
     var titleView: some View {
         Text("Furniture List")
             .font(.largeTitle)

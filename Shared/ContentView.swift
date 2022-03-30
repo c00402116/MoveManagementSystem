@@ -47,9 +47,10 @@ struct ContentView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .frame(width: 400, height: 80)
-                    .background(Color.blue)
+                    .background(loggedIn ? Color.blue : Color.gray)
                     .cornerRadius(8)
                 }
+                .disabled(loggedIn == false)
                 
                 if (!loggedIn) {
                     VStack {
@@ -72,19 +73,8 @@ struct ContentView: View {
                 }
                 
                 Spacer()
-                
-                Text("Dev SQL Tests")
-                    .font(.largeTitle)
-                    .padding()
-                NavigationLink(destination: CustomersSQLExample()) {
-                    Text("Customers")
-                }
-                NavigationLink(destination: PostCustomersSQLExample()) {
-                    Text("Insert a customer here")
-                }
-                
-                Spacer()
-                
+            
+
                 HStack {
                     Text("Need help? Try visiting our")
                         .foregroundColor(Color.gray)

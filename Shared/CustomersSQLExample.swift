@@ -21,11 +21,24 @@ struct Admin: Decodable, Identifiable {
     var address: String!
     var email: String!
     var password: String!
-    var costVar: Int!
-    var timeVar: Int!
-    var minHrs: Int!
-    var minTimes: Int!
-    var standardRates: Int!
+    var minLaborHours: Int!
+    var travelPerMile: Int!
+    var businessRate: Int!
+    var employeeTrueCost: Int!
+    var assembly_disassembly: Int!
+    
+    enum CodingKeys: String,CodingKey {
+        case id = "adminID"
+        case name = "name"
+        case address = "address"
+        case email = "email"
+        case password = "password"
+        case minLaborHours = "minLaborHours"
+        case travelPerMile = "travelPerMile"
+        case businessRate = "businessRate"
+        case employeeTrueCost = "employeeTrueCost"
+        case assembly_disassembly = "assembly_disassembly"
+    }
 }
 struct Stop: Decodable, Identifiable {
     var id: Int //jobID in the database

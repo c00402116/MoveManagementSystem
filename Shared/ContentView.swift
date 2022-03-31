@@ -69,6 +69,28 @@ struct ContentView: View {
                     Spacer()
                     Text("Admin Mode")
                         .foregroundColor(Color.red)
+                    NavigationLink(destination: CostVariables()) {
+                        Button(action: {}) {
+                            Text("Cost Variables")
+                                .padding()
+                                .foregroundColor(Color.white)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(width: 400, height: 80)
+                        .background(Color.green)
+                        .cornerRadius(8)
+                    }
+                    NavigationLink(destination: TimeVariables()) {
+                        Button(action: {}) {
+                            Text("Time Variables")
+                                .padding()
+                                .foregroundColor(Color.white)
+                        }
+                        .buttonStyle(PlainButtonStyle())
+                        .frame(width: 400, height: 80)
+                        .background(Color.blue)
+                        .cornerRadius(8)
+                    }
                 }
                 
                 Spacer()

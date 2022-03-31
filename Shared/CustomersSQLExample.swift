@@ -257,6 +257,16 @@ class AdminService: ObservableObject {
             return 6
         }
     }
+    
+    func calculateLoadingTime(_ weightForLocation: Int, _ numOfEmplpyeesRequired: Int) -> Int {
+        return ((weightForLocation / numOfEmplpyeesRequired) / 600)
+    }
+    
+    func calculateUnloadingTime(_ weightForLocation: Int, _ numOfEmplpyeesRequired: Int) -> Int {
+        return ((weightForLocation / numOfEmplpyeesRequired) / 720)
+    }
+    
+    
 }
 
 class StopsService: ObservableObject {

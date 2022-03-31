@@ -209,6 +209,54 @@ class AdminService: ObservableObject {
             }.store(in: &cancellableSet)
         //return returnVal
     }
+    
+    func changeCostVars(_ minLaborHours: Int, _ travelPerMile: Int, _ businessRate: Int,_ employeeTrueCost: Int, _ assembly_disassembly: Int, _ id: Int) -> Int {
+        let urlstring = "http://frankcmps490sp22.cmix.louisiana.edu/updateCostVars.php?adminID=\(id)"
+        let url = URL(string: urlstring)!
+        //print(businessRate)
+        var urlRequest = URLRequest(url: url)
+        urlRequest.httpMethod = "Post"
+        let postString = "minLaborHours=\(minLaborHours) & businessRate=\(businessRate) & travelPerMile=\(travelPerMile) & employeeTrueCost=\(employeeTrueCost) & assembly_disassembly=\(assembly_disassembly)"
+        urlRequest.httpBody = postString.data(using: String.Encoding.utf8)
+        
+        URLSession.shared
+            .dataTaskPublisher(for: urlRequest)
+            .map(\.data)
+            .decode(type: [Admin].self, decoder: JSONDecoder())
+            .receive(on: RunLoop.main)
+            .sink {completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    self.errorMessage = error.localizedDescription
+                    print(error)
+                }
+            } receiveValue: {
+                self.admins.removeAll()
+                self.admins = $0
+            }.store(in: &cancellableSet)
+        if (errorMessage == "") {
+            return 1
+        } else {
+            return 2
+        }
+        
+    }
+    
+    func calculateAmtOfEmployees(_ totalWeight: Int) -> Int {
+        if(totalWeight <= 3599) {
+            return 2
+        } else if(totalWeight > 3599 && totalWeight <= 5199) {
+            return 3
+        } else if(totalWeight > 5199 && totalWeight <= 9999) {
+            return 4
+        } else if(totalWeight > 9999 && totalWeight <= 13999) {
+            return 5
+        } else {
+            return 6
+        }
+    }
 }
 
 class StopsService: ObservableObject {

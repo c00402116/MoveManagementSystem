@@ -37,6 +37,8 @@
 		E0B5FD3F27AC67C100A415A8 /* PreliminarySurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */; };
 		E0B5FD4127AC689A00A415A8 /* DetailedSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */; };
 		E0B5FD4227AC689A00A415A8 /* DetailedSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */; };
+		E0EC236E27F62FF8006A0538 /* DetailedEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */; };
+		E0EC236F27F62FF8006A0538 /* DetailedEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +82,7 @@
 		E0B5FD2327AC368B00A415A8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreliminarySurvey.swift; sourceTree = "<group>"; };
 		E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSurvey.swift; sourceTree = "<group>"; };
+		E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEstimates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +141,7 @@
 				E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */,
 				E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */,
 				E047491E27F4D7F100A877BA /* PreliminaryEstimates.swift */,
+				E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */,
 				9A09E90B27ECCF0B009B3A26 /* selectFurniture.swift */,
 				E0B5FCFE27AC368800A415A8 /* Persistence.swift */,
 				E0B5FCFF27AC368B00A415A8 /* Assets.xcassets */,
@@ -351,6 +355,7 @@
 				E009C1ED27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2927AC368B00A415A8 /* ContentView.swift in Sources */,
 				E049277227C96EBB00D3F751 /* adminLogIn.swift in Sources */,
+				E0EC236E27F62FF8006A0538 /* DetailedEstimates.swift in Sources */,
 				E0B5FD4127AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052227AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
 			);
@@ -370,6 +375,7 @@
 				E009C1EE27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2A27AC368B00A415A8 /* ContentView.swift in Sources */,
 				E049277327C96EBB00D3F751 /* adminLogIn.swift in Sources */,
+				E0EC236F27F62FF8006A0538 /* DetailedEstimates.swift in Sources */,
 				E0B5FD4227AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052327AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
 			);

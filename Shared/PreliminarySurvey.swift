@@ -88,6 +88,11 @@ struct PreliminarySurvey: View {
                             Text("\(address1)\n\(address2)\n\(address3)")
                                 .foregroundColor(Color.white)
                                 .padding()
+                        } else if (address1 == "" || address3 == "") {
+                            Text("select Edit")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
                         }
                     }
                     HStack {
@@ -100,13 +105,24 @@ struct PreliminarySurvey: View {
                             .padding()
                     }
                     HStack {
+                        if (sqft > 0) {
+                            Text("**\(sqft)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("sq. ft. not set")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
                         Text("Floors:   **\(floor)**")
                             .foregroundColor(Color.white)
                             .padding()
+                        
                         Stepper("", value: $floor, in: 0...99)
                             .padding()
                     }
-                    HStack {
+                    /*HStack {
                         if (sqft > 0) {
                             Text("**\(sqft)** sq. ft.")
                                 .foregroundColor(Color.white)
@@ -117,12 +133,12 @@ struct PreliminarySurvey: View {
                                 .italic()
                                 .padding()
                         }
-                    }
+                    }*/
                     HStack {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurniture(furnitureSelectedOrig: furnitureSelectedOrig)) {
+                        NavigationLink(destination: selectFurniture(furnitureSelectedOrig: furnitureSelectedOrig, PrelimOrDetail: true)) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
@@ -188,6 +204,11 @@ struct PreliminarySurvey: View {
                             Text("\(address1dest)\n\(address2dest)\n\(address3dest )")
                                 .foregroundColor(Color.white)
                                 .padding()
+                        } else if (address1dest == "" || address3dest == "") {
+                            Text("select Edit")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
                         }
                     }
                     HStack {
@@ -200,13 +221,24 @@ struct PreliminarySurvey: View {
                             .padding()
                     }
                     HStack {
+                        if (sqftDest > 0) {
+                            Text("**\(sqftDest)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("sq. ft. not set")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
                         Text("Floors:   **\(floorDest)**")
                             .foregroundColor(Color.white)
                             .padding()
+                        
                         Stepper("", value: $floorDest, in: 0...99)
                             .padding()
                     }
-                    HStack {
+                    /*HStack {
                         if (sqftDest > 0) {
                             Text("**\(sqftDest)** sq. ft.")
                                 .foregroundColor(Color.white)
@@ -217,12 +249,12 @@ struct PreliminarySurvey: View {
                                 .italic()
                                 .padding()
                         }
-                    }
+                    }*/
                     HStack {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurnitureDest(furnitureSelectedDest: furnitureSelectedDest)) {
+                        NavigationLink(destination: selectFurnitureDest(furnitureSelectedDest: furnitureSelectedDest, PrelimOrDetail: true)) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
@@ -249,9 +281,10 @@ struct PreliminarySurvey: View {
                 }
                 .buttonStyle(PlainButtonStyle())
                 .frame(width: 400, height: 80)
-                .background(Color.blue)
+                .background((address1 == "" || address3 == "" || address1dest == "" || address3dest == "") ? Color.gray : Color.blue)
                 .cornerRadius(8)
             }
+            .disabled(address1 == "" || address3 == "" || address1dest == "" || address3dest == "")
         }
     }
     
@@ -307,14 +340,6 @@ struct PreliminarySurvey: View {
             debugPrint(distanceInMeters)
             distance = (Double)(distanceInMeters)
         }
-    }
-    
-    public func getEstimates() -> Int {
-        //might need some help with this
-        costEstimate = 500 //for now
-        timeEstimate = 60 // for now
-        showAlert = true
-        return 0 // for now
     }
 }
 

@@ -9,12 +9,14 @@
 /* Begin PBXBuildFile section */
 		9A09E90C27ECCF0B009B3A26 /* selectFurniture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A09E90B27ECCF0B009B3A26 /* selectFurniture.swift */; };
 		9A09E90D27ECCF0B009B3A26 /* selectFurniture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A09E90B27ECCF0B009B3A26 /* selectFurniture.swift */; };
+		9AAE3EC127F61BE0009159CC /* CostVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE3EC027F61BE0009159CC /* CostVariables.swift */; };
+		9AAE3EC227F61BE0009159CC /* CostVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE3EC027F61BE0009159CC /* CostVariables.swift */; };
+		9AAE3EC427F61BED009159CC /* TimeVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE3EC327F61BED009159CC /* TimeVariables.swift */; };
+		9AAE3EC527F61BED009159CC /* TimeVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE3EC327F61BED009159CC /* TimeVariables.swift */; };
 		9AFF103827BC444000A55C14 /* PostCustomersSQLExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF103727BC444000A55C14 /* PostCustomersSQLExample.swift */; };
 		9AFF103927BC444000A55C14 /* PostCustomersSQLExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9AFF103727BC444000A55C14 /* PostCustomersSQLExample.swift */; };
 		E009C1ED27B6F06B0075307C /* LoginRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009C1EC27B6F06B0075307C /* LoginRegister.swift */; };
 		E009C1EE27B6F06B0075307C /* LoginRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = E009C1EC27B6F06B0075307C /* LoginRegister.swift */; };
-		E047491F27F4D7F100A877BA /* PreliminaryEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047491E27F4D7F100A877BA /* PreliminaryEstimates.swift */; };
-		E047492027F4D7F100A877BA /* PreliminaryEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E047491E27F4D7F100A877BA /* PreliminaryEstimates.swift */; };
 		E049277227C96EBB00D3F751 /* adminLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049277127C96EBB00D3F751 /* adminLogIn.swift */; };
 		E049277327C96EBB00D3F751 /* adminLogIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = E049277127C96EBB00D3F751 /* adminLogIn.swift */; };
 		E0A3052227AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0A3052127AF0B6A0008A70E /* CustomersSQLExample.swift */; };
@@ -37,8 +39,6 @@
 		E0B5FD3F27AC67C100A415A8 /* PreliminarySurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */; };
 		E0B5FD4127AC689A00A415A8 /* DetailedSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */; };
 		E0B5FD4227AC689A00A415A8 /* DetailedSurvey.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */; };
-		E0EC236E27F62FF8006A0538 /* DetailedEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */; };
-		E0EC236F27F62FF8006A0538 /* DetailedEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,9 +60,10 @@
 
 /* Begin PBXFileReference section */
 		9A09E90B27ECCF0B009B3A26 /* selectFurniture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectFurniture.swift; sourceTree = "<group>"; };
+		9AAE3EC027F61BE0009159CC /* CostVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CostVariables.swift; sourceTree = "<group>"; };
+		9AAE3EC327F61BED009159CC /* TimeVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeVariables.swift; sourceTree = "<group>"; };
 		9AFF103727BC444000A55C14 /* PostCustomersSQLExample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCustomersSQLExample.swift; sourceTree = "<group>"; };
 		E009C1EC27B6F06B0075307C /* LoginRegister.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegister.swift; sourceTree = "<group>"; };
-		E047491E27F4D7F100A877BA /* PreliminaryEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreliminaryEstimates.swift; sourceTree = "<group>"; };
 		E049277127C96EBB00D3F751 /* adminLogIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = adminLogIn.swift; sourceTree = "<group>"; };
 		E0A3052127AF0B6A0008A70E /* CustomersSQLExample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomersSQLExample.swift; sourceTree = "<group>"; };
 		E0A3052427AF12100008A70E /* MMS--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MMS--iOS--Info.plist"; sourceTree = "<group>"; };
@@ -82,7 +83,6 @@
 		E0B5FD2327AC368B00A415A8 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
 		E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreliminarySurvey.swift; sourceTree = "<group>"; };
 		E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedSurvey.swift; sourceTree = "<group>"; };
-		E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEstimates.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,13 +135,13 @@
 				E0B5FCFC27AC368800A415A8 /* MMSApp.swift */,
 				E0B5FCFD27AC368800A415A8 /* ContentView.swift */,
 				9AFF103727BC444000A55C14 /* PostCustomersSQLExample.swift */,
+				9AAE3EC027F61BE0009159CC /* CostVariables.swift */,
+				9AAE3EC327F61BED009159CC /* TimeVariables.swift */,
 				E009C1EC27B6F06B0075307C /* LoginRegister.swift */,
 				E049277127C96EBB00D3F751 /* adminLogIn.swift */,
 				E0A3052127AF0B6A0008A70E /* CustomersSQLExample.swift */,
 				E0B5FD4027AC689A00A415A8 /* DetailedSurvey.swift */,
 				E0B5FD3D27AC67C100A415A8 /* PreliminarySurvey.swift */,
-				E047491E27F4D7F100A877BA /* PreliminaryEstimates.swift */,
-				E0EC236D27F62FF8006A0538 /* DetailedEstimates.swift */,
 				9A09E90B27ECCF0B009B3A26 /* selectFurniture.swift */,
 				E0B5FCFE27AC368800A415A8 /* Persistence.swift */,
 				E0B5FCFF27AC368B00A415A8 /* Assets.xcassets */,
@@ -349,13 +349,13 @@
 				9A09E90C27ECCF0B009B3A26 /* selectFurniture.swift in Sources */,
 				E0B5FD3E27AC67C100A415A8 /* PreliminarySurvey.swift in Sources */,
 				E0B5FD2527AC368B00A415A8 /* MMS.xcdatamodeld in Sources */,
-				E047491F27F4D7F100A877BA /* PreliminaryEstimates.swift in Sources */,
 				E0B5FD2B27AC368B00A415A8 /* Persistence.swift in Sources */,
 				E0B5FD2727AC368B00A415A8 /* MMSApp.swift in Sources */,
 				E009C1ED27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2927AC368B00A415A8 /* ContentView.swift in Sources */,
+				9AAE3EC127F61BE0009159CC /* CostVariables.swift in Sources */,
 				E049277227C96EBB00D3F751 /* adminLogIn.swift in Sources */,
-				E0EC236E27F62FF8006A0538 /* DetailedEstimates.swift in Sources */,
+				9AAE3EC427F61BED009159CC /* TimeVariables.swift in Sources */,
 				E0B5FD4127AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052227AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
 			);
@@ -369,13 +369,13 @@
 				9A09E90D27ECCF0B009B3A26 /* selectFurniture.swift in Sources */,
 				E0B5FD3F27AC67C100A415A8 /* PreliminarySurvey.swift in Sources */,
 				E0B5FD2627AC368B00A415A8 /* MMS.xcdatamodeld in Sources */,
-				E047492027F4D7F100A877BA /* PreliminaryEstimates.swift in Sources */,
 				E0B5FD2C27AC368B00A415A8 /* Persistence.swift in Sources */,
 				E0B5FD2827AC368B00A415A8 /* MMSApp.swift in Sources */,
 				E009C1EE27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2A27AC368B00A415A8 /* ContentView.swift in Sources */,
+				9AAE3EC227F61BE0009159CC /* CostVariables.swift in Sources */,
 				E049277327C96EBB00D3F751 /* adminLogIn.swift in Sources */,
-				E0EC236F27F62FF8006A0538 /* DetailedEstimates.swift in Sources */,
+				9AAE3EC527F61BED009159CC /* TimeVariables.swift in Sources */,
 				E0B5FD4227AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052327AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
 			);

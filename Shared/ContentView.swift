@@ -62,7 +62,7 @@ struct ContentView: View {
                     }
                 } else if (loggedIn) {
                     Spacer()
-                    Text("Welcome <username associated with \(emailLoggedIn)>")
+                    Text("Welcome! You are logged in.")
                         .padding()
                 }
                 if (adminLoggedIn) {
@@ -95,7 +95,7 @@ struct ContentView: View {
                 
                 Spacer()
                 
-                Text("Dev SQL Tests")
+                /*Text("Dev SQL Tests")
                     .font(.largeTitle)
                     .padding()
                 NavigationLink(destination: CustomersSQLExample()) {
@@ -103,9 +103,7 @@ struct ContentView: View {
                 }
                 NavigationLink(destination: PostCustomersSQLExample()) {
                     Text("Insert a customer here")
-                }
-                
-                Spacer()
+                }*/
                 
                 HStack {
                     Text("Need help? Try visiting our")

@@ -38,12 +38,14 @@ struct PreliminarySurvey: View {
     @AppStorage("address3") var address3: String = ""
     @AppStorage("type") var type: Int = 0
     @AppStorage("floor") var floor: Int = 1
+    @AppStorage("sqft") var sqft: Int = 0
     
     @AppStorage("address1dest") var address1dest: String = ""
     @AppStorage("address2dest") var address2dest: String = ""
     @AppStorage("address3dest") var address3dest: String = ""
     @AppStorage("typeDest") var typeDest: Int = 0
     @AppStorage("floorDest") var floorDest: Int = 1
+    @AppStorage("sqftDest") var sqftDest: Int = 0
     
     @AppStorage("totalWeightOrig") var totalWeightOrig : Int = 0
     @AppStorage("totalWeightDest") var totalWeightDest : Int = 0
@@ -86,6 +88,11 @@ struct PreliminarySurvey: View {
                             Text("\(address1)\n\(address2)\n\(address3)")
                                 .foregroundColor(Color.white)
                                 .padding()
+                        } else if (address1 == "" || address3 == "") {
+                            Text("select Edit")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
                         }
                     }
                     HStack {
@@ -98,17 +105,40 @@ struct PreliminarySurvey: View {
                             .padding()
                     }
                     HStack {
+                        if (sqft > 0) {
+                            Text("**\(sqft)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("sq. ft. not set")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
                         Text("Floors:   **\(floor)**")
                             .foregroundColor(Color.white)
                             .padding()
+                        
                         Stepper("", value: $floor, in: 0...99)
                             .padding()
                     }
+                    /*HStack {
+                        if (sqft > 0) {
+                            Text("**\(sqft)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("Select Edit to set sq. ft.")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
+                    }*/
                     HStack {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurniture(furnitureSelectedOrig: furnitureSelectedOrig)) {
+                        NavigationLink(destination: selectFurniture(furnitureSelectedOrig: furnitureSelectedOrig, PrelimOrDetail: true)) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
@@ -134,6 +164,8 @@ struct PreliminarySurvey: View {
                             .font(.system(size: 28))
                             .padding()
                         Spacer()
+                        Image(systemName: "mappin.and.ellipse")
+                            .foregroundColor(Color.white)
                         Text("\((distance/1000), specifier:"%.1f") km")
                             .foregroundColor(Color.white)
                             .padding()
@@ -172,6 +204,11 @@ struct PreliminarySurvey: View {
                             Text("\(address1dest)\n\(address2dest)\n\(address3dest )")
                                 .foregroundColor(Color.white)
                                 .padding()
+                        } else if (address1dest == "" || address3dest == "") {
+                            Text("select Edit")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
                         }
                     }
                     HStack {
@@ -184,17 +221,40 @@ struct PreliminarySurvey: View {
                             .padding()
                     }
                     HStack {
+                        if (sqftDest > 0) {
+                            Text("**\(sqftDest)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("sq. ft. not set")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
                         Text("Floors:   **\(floorDest)**")
                             .foregroundColor(Color.white)
                             .padding()
+                        
                         Stepper("", value: $floorDest, in: 0...99)
                             .padding()
                     }
+                    /*HStack {
+                        if (sqftDest > 0) {
+                            Text("**\(sqftDest)** sq. ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        } else {
+                            Text("Select Edit to set sq. ft.")
+                                .foregroundColor(Color.white)
+                                .italic()
+                                .padding()
+                        }
+                    }*/
                     HStack {
                         Text("Itemized List")
                             .foregroundColor(Color.white)
                             .padding()
-                        NavigationLink(destination: selectFurnitureDest(furnitureSelectedDest: furnitureSelectedDest)) {
+                        NavigationLink(destination: selectFurnitureDest(furnitureSelectedDest: furnitureSelectedDest, PrelimOrDetail: true)) {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(Color.white)
                         }
@@ -212,12 +272,29 @@ struct PreliminarySurvey: View {
             .background(Color.red)
             .cornerRadius(8)
             .padding()
+            
+            NavigationLink(destination: PreliminaryEstimates(sqft: sqft, sqftDest: sqftDest, distance: distance)) {
+                Button(action: {}) {
+                    Text("Get Free Estimate")
+                        .padding()
+                        .foregroundColor(Color.white)
+                }
+                .buttonStyle(PlainButtonStyle())
+                .frame(width: 400, height: 80)
+                .background((address1 == "" || address3 == "" || address1dest == "" || address3dest == "") ? Color.gray : Color.blue)
+                .cornerRadius(8)
+            }
+            .disabled(address1 == "" || address3 == "" || address1dest == "" || address3dest == "")
         }
     }
     
     public func getDistance(_ address1: String, _ address3: String, _ address1dest: String, _ address3dest: String) -> Void {
         debugPrint("\(address1), \(address3)")
         debugPrint("\(address1dest), \(address3dest)")
+        
+        if (address1 == "" || address3 == "" || address1dest == "" || address3dest == "") {
+            return
+        }
         
         let orig = address1 + ", " + address3
         let dest = address1dest + ", " + address3dest
@@ -233,6 +310,7 @@ struct PreliminarySurvey: View {
         let geocoder = CLGeocoder()
         var distanceInMeters: Double = 0.0
         
+        
         geocoder.geocodeAddressString(orig) {
             placemarks, error in
             let placemark = placemarks?.first
@@ -241,6 +319,8 @@ struct PreliminarySurvey: View {
             lat1 = (Double)(lat!)
             lon1 = (Double)(lon!)
         }
+        
+        
         let geocoder2 = CLGeocoder()
         geocoder2.geocodeAddressString(dest) {
             placemarks, error in
@@ -261,14 +341,6 @@ struct PreliminarySurvey: View {
             distance = (Double)(distanceInMeters)
         }
     }
-    
-    public func getEstimates() -> Int {
-        //might need some help with this
-        costEstimate = 500 //for now
-        timeEstimate = 60 // for now
-        showAlert = true
-        return 0 // for now
-    }
 }
 
 struct editAddressView: View {
@@ -280,12 +352,13 @@ struct editAddressView: View {
     @AppStorage("address2") var address2: String = ""
     @AppStorage("address3") var address3: String = ""
     @AppStorage("type") var type: Int = 0
-    
+    @AppStorage("sqft") var sqft: Int = 0
     
     @AppStorage("address1dest") var address1dest: String = ""
     @AppStorage("address2dest") var address2dest: String = ""
     @AppStorage("address3dest") var address3dest: String = ""
     @AppStorage("typeDest") var typeDest: Int = 0
+    @AppStorage("sqftDest") var sqftDest: Int = 0
     
     var typeOptions: [String] = ["Residential Home", "Apartment Complex", "Business"]
     
@@ -300,7 +373,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("Street Adress", text: $address1)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -308,7 +382,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("Apt/Suite", text: $address2)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -316,7 +391,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("City/State", text: $address3)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -329,11 +405,23 @@ struct editAddressView: View {
                                     Text("\(typeOptions[option])")
                                 }
                             }
+                            .foregroundColor(Color.white)
                             .padding()
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        }
+                        HStack {
+                            Text("Sq. Ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Sq. Ft.", value: $sqft, formatter: NumberFormatter())
+                                .foregroundColor(Color.white)
+                                .padding()
                         }
                     }
                 }
-                .foregroundColor(Color.green)
+                .background(Color.green)
                 .cornerRadius(8)
                 .padding()
             }
@@ -345,7 +433,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("Street Adress", text: $address1dest)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -353,7 +442,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("Apt/Suite", text: $address2dest)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -361,7 +451,8 @@ struct editAddressView: View {
                                 .foregroundColor(Color.white)
                                 .padding()
                             TextField("City/State", text: $address3dest)
-                                .frame(width: 280)
+                                .foregroundColor(Color.white)
+                                .frame(width: 260)
                                 .padding()
                         }
                         HStack {
@@ -374,7 +465,19 @@ struct editAddressView: View {
                                     Text("\(typeOptions[option])")
                                 }
                             }
+                            .foregroundColor(Color.white)
                             .padding()
+                            Image(systemName: "chevron.down")
+                                .foregroundColor(Color.white)
+                                .padding()
+                        }
+                        HStack {
+                            Text("Sq. Ft.")
+                                .foregroundColor(Color.white)
+                                .padding()
+                            TextField("Sq. Ft.", value: $sqftDest, formatter: NumberFormatter())
+                                .foregroundColor(Color.white)
+                                .padding()
                         }
                     }
                 }

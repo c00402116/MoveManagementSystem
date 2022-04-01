@@ -8,7 +8,7 @@
 import SwiftUI
 import CoreData
 
-struct ContentView: View {
+struct Homepage: View {
     
     @AppStorage("email") var emailLoggedIn: String = ""
     @AppStorage("password") var passwordLoggedIn: String = ""
@@ -25,18 +25,6 @@ struct ContentView: View {
     
     var body: some View {
         
-        TabView {
-            Homepage()
-                .tabItem {
-                    Label("Home", systemImage: "house")
-                }
-            MyJobs()
-                .tabItem {
-                    Label("My Jobs", systemImage: "wrench")
-                }
-        }
-        
-        /*
         NavigationView {
             VStack {
                 NavigationLink(destination: PreliminarySurvey(emailLoggedIn: emailLoggedIn, passwordLoggedIn: passwordLoggedIn, customerID: customerID, loggedIn: loggedIn, address1: "", address2: "", address3: "", type: 0, floor: 1)) {
@@ -127,9 +115,10 @@ struct ContentView: View {
                     Link("Contact Us", destination: URL(string: "https://www.apple.com")!)
                     //Button("Contact Us") {}
                 }
+                .padding()
             }
         }
-        .navigationBarTitle(Text("Move Management System"))*/
+        .navigationBarTitle(Text("Move Management System"))
     }
     
     private func addItem() {
@@ -171,7 +160,7 @@ private let itemFormatter: DateFormatter = {
     return formatter
 }()
 
-struct ContentView_Previews: PreviewProvider {
+struct Homepage_Previews: PreviewProvider {
     static var previews: some View {
         ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
     }

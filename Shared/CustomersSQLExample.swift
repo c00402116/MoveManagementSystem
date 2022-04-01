@@ -352,13 +352,16 @@ class JobService: ObservableObject {
     @Published var jobs: [Job] = []
     private var cancellableSet: Set<AnyCancellable> = []
     
-    func insertJob(_ adminID: Int, _ customerID: Int, _ totalWeight: Int, _ squareFeet: Int, _ costEstimate: Int, _ timeEstimate: Int) -> Int {
+    func insertJob(_ adminID: Int, _ customerID: Int, _ totalWeight: Int, _ costEstimate: Int, _ timeEstimate: Int, _ address1orig: String, _ address2orig: String, _ address3orig: String, _ address1dest: String, _ address2dest: String, _ address3dest: String, _ sqftOrig: Int, _ sqftDest: Int, _ floorsOrig: Int, _ floorsDest: Int) -> Void {
+        
+        debugPrint("HEEREEE")
+        
         let urlstring = "http://frankcmps490sp22.cmix.louisiana.edu/newJob.php"
         let url = URL(string: urlstring)!
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "Post"
-        let postString = "adminID=\(adminID) & customerID=\(customerID) & totalWeight=\(totalWeight) & squareFeet=\(squareFeet) & costEstimate=\(costEstimate) & timeEstimate=\(timeEstimate)"
+        let postString = "adminID=\(adminID) & customerID=\(customerID) & totalWeight=\(totalWeight) & costEstimate=\(costEstimate) & timeEstimate=\(timeEstimate) & address1orig=\(address1orig) & address2orig=\(address2orig) & address3orig=\(address3orig) & address1dest=\(address1dest) & address2dest=\(address2dest) & address3dest=\(address3dest) & sqftOrig=\(sqftOrig) & sqftDest=\(sqftDest) & floorsOrig=\(floorsOrig) & floorsDest=\(floorsDest)"
         urlRequest.httpBody = postString.data(using: String.Encoding.utf8)
         
         URLSession.shared
@@ -377,10 +380,8 @@ class JobService: ObservableObject {
                 self.jobs.removeAll()
                 self.jobs = $0
             }.store(in: &cancellableSet)
-        if (errorMessage == "" && jobs.count > 0) {
-            return jobs[0].id
-        } else {
-            return 0
+        if (errorMessage != "") {
+            debugPrint(errorMessage)
         }
     }
 }

@@ -9,6 +9,11 @@ import SwiftUI
 
 struct PreliminaryEstimates: View {
     
+    @AppStorage("email") var emailLoggedIn: String = ""
+    @AppStorage("password") var passwordLoggedIn: String = ""
+    @AppStorage("customerID") var customerID: Int = 0
+    @AppStorage("loggedIn") var loggedIn: Bool = false
+    
     @State var sqft: Int = 0
     @State var sqftDest: Int = 0
     @State var distance: Double = 0

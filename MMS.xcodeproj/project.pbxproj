@@ -25,6 +25,10 @@
 		E0AF299B27F7660F00C2CB15 /* DetailedEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF299927F7660F00C2CB15 /* DetailedEstimates.swift */; };
 		E0AF299D27F7663200C2CB15 /* PreliminaryEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF299C27F7663200C2CB15 /* PreliminaryEstimates.swift */; };
 		E0AF299E27F7663200C2CB15 /* PreliminaryEstimates.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF299C27F7663200C2CB15 /* PreliminaryEstimates.swift */; };
+		E0AF29A027F7787600C2CB15 /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF299F27F7787600C2CB15 /* Homepage.swift */; };
+		E0AF29A127F7787600C2CB15 /* Homepage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF299F27F7787600C2CB15 /* Homepage.swift */; };
+		E0AF29A327F7790400C2CB15 /* MyJobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF29A227F7790400C2CB15 /* MyJobs.swift */; };
+		E0AF29A427F7790400C2CB15 /* MyJobs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0AF29A227F7790400C2CB15 /* MyJobs.swift */; };
 		E0B5FD1627AC368B00A415A8 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD1527AC368B00A415A8 /* Tests_iOS.swift */; };
 		E0B5FD1827AC368B00A415A8 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD1727AC368B00A415A8 /* Tests_iOSLaunchTests.swift */; };
 		E0B5FD2227AC368B00A415A8 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B5FD2127AC368B00A415A8 /* Tests_macOS.swift */; };
@@ -73,6 +77,8 @@
 		E0A3052427AF12100008A70E /* MMS--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "MMS--iOS--Info.plist"; sourceTree = "<group>"; };
 		E0AF299927F7660F00C2CB15 /* DetailedEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedEstimates.swift; sourceTree = "<group>"; };
 		E0AF299C27F7663200C2CB15 /* PreliminaryEstimates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreliminaryEstimates.swift; sourceTree = "<group>"; };
+		E0AF299F27F7787600C2CB15 /* Homepage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Homepage.swift; sourceTree = "<group>"; };
+		E0AF29A227F7790400C2CB15 /* MyJobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyJobs.swift; sourceTree = "<group>"; };
 		E0B5FCFB27AC368800A415A8 /* Shared.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Shared.xcdatamodel; sourceTree = "<group>"; };
 		E0B5FCFC27AC368800A415A8 /* MMSApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MMSApp.swift; sourceTree = "<group>"; };
 		E0B5FCFD27AC368800A415A8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -140,6 +146,8 @@
 			children = (
 				E0B5FCFC27AC368800A415A8 /* MMSApp.swift */,
 				E0B5FCFD27AC368800A415A8 /* ContentView.swift */,
+				E0AF29A227F7790400C2CB15 /* MyJobs.swift */,
+				E0AF299F27F7787600C2CB15 /* Homepage.swift */,
 				9AFF103727BC444000A55C14 /* PostCustomersSQLExample.swift */,
 				9AAE3EC027F61BE0009159CC /* CostVariables.swift */,
 				9AAE3EC327F61BED009159CC /* TimeVariables.swift */,
@@ -364,10 +372,12 @@
 				E009C1ED27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2927AC368B00A415A8 /* ContentView.swift in Sources */,
 				9AAE3EC127F61BE0009159CC /* CostVariables.swift in Sources */,
+				E0AF29A327F7790400C2CB15 /* MyJobs.swift in Sources */,
 				E049277227C96EBB00D3F751 /* adminLogIn.swift in Sources */,
 				9AAE3EC427F61BED009159CC /* TimeVariables.swift in Sources */,
 				E0B5FD4127AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052227AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
+				E0AF29A027F7787600C2CB15 /* Homepage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -386,10 +396,12 @@
 				E009C1EE27B6F06B0075307C /* LoginRegister.swift in Sources */,
 				E0B5FD2A27AC368B00A415A8 /* ContentView.swift in Sources */,
 				9AAE3EC227F61BE0009159CC /* CostVariables.swift in Sources */,
+				E0AF29A427F7790400C2CB15 /* MyJobs.swift in Sources */,
 				E049277327C96EBB00D3F751 /* adminLogIn.swift in Sources */,
 				9AAE3EC527F61BED009159CC /* TimeVariables.swift in Sources */,
 				E0B5FD4227AC689A00A415A8 /* DetailedSurvey.swift in Sources */,
 				E0A3052327AF0B6A0008A70E /* CustomersSQLExample.swift in Sources */,
+				E0AF29A127F7787600C2CB15 /* Homepage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

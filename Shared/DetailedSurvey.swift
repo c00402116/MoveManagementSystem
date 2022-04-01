@@ -269,7 +269,7 @@ struct DetailedSurvey: View {
             }
             Divider()
             
-            NavigationLink(destination: DetailedEstimates(sqft: sqftDetail, sqftDest: sqftDestDetail, distance: distanceDetail)) {
+            NavigationLink(destination: DetailedEstimates(sqft: sqftDetail, sqftDest: sqftDestDetail, distance: distanceDetail, totalWeightOrigDetail: totalWeightOrigDetail, totalWeightDestDetail: totalWeightDestDetail)) {
                 Button(action: {}) {
                     Text("Get Estimate")
                         .padding()

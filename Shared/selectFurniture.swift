@@ -43,7 +43,7 @@ struct selectFurniture: View {
                         .foregroundColor(furnitureSelectedOrig.contains(type.name) ? Color.black : Color.white)
                     
                     if (PrelimOrDetail) {
-                        Text("\(type.name), Weight: \(type.weight)")
+                        Text("\(type.name), Weight: \(type.weight) lbs.")
                             .onTapGesture {
                                 if self.furnitureSelectedOrig.contains(type.name) {
                                     self.furnitureSelectedOrig.remove(type.name)
@@ -54,7 +54,7 @@ struct selectFurniture: View {
                                 }
                             }
                     } else if (!PrelimOrDetail) {
-                        Text("\(type.name), Weight: \(type.weight)")
+                        Text("\(type.name), Weight: \(type.weight) lbs.")
                             .onTapGesture {
                                 if self.furnitureSelectedOrig.contains(type.name) {
                                     self.furnitureSelectedOrig.remove(type.name)
@@ -139,7 +139,7 @@ struct selectFurnitureDest: View {
                  }*/
                 
                 if (PrelimOrDetail) {
-                Text("\(type.name), Weight: \(type.weight)")
+                Text("\(type.name), Weight: \(type.weight) lbs.")
                     .onTapGesture {
                         if self.furnitureSelectedDest.contains(type.name) {
                             self.furnitureSelectedDest.remove(type.name)
@@ -150,7 +150,7 @@ struct selectFurnitureDest: View {
                         }
                     }
                 } else {
-                    Text("\(type.name), Weight: \(type.weight)")
+                    Text("\(type.name), Weight: \(type.weight) lbs.")
                         .onTapGesture {
                             if self.furnitureSelectedDest.contains(type.name) {
                                 self.furnitureSelectedDest.remove(type.name)

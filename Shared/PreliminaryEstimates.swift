@@ -38,7 +38,9 @@ struct PreliminaryEstimates: View {
                         .foregroundColor(Color.white)
                         .padding()
                     Spacer()
-                    Text("")
+                    Text("1:30 - 2:30")
+                        .foregroundColor(Color.white)
+                        .padding()
                 }
                 .background(Color.red)
                 .cornerRadius(8)

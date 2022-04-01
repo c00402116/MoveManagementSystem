@@ -47,9 +47,10 @@ struct ContentView: View {
                     }
                     .buttonStyle(PlainButtonStyle())
                     .frame(width: 400, height: 80)
-                    .background(Color.blue)
+                    .background(loggedIn ? Color.blue : Color.gray)
                     .cornerRadius(8)
                 }
+                .disabled(!loggedIn)
                 
                 if (!loggedIn) {
                     VStack {

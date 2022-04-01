@@ -17,6 +17,8 @@ struct DetailedEstimates: View {
     @State var hoursHigh: Int = 0
     @State var minutesHigh: Int = 0
     
+    @ObservedObject var adminService = AdminService()
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -37,7 +39,9 @@ struct DetailedEstimates: View {
                         .foregroundColor(Color.white)
                         .padding()
                     Spacer()
-                    Text("")
+                    Text("1:30 - 2:30")
+                        .foregroundColor(Color.white)
+                        .padding()
                 }
                 .background(Color.red)
                 .cornerRadius(8)

@@ -342,9 +342,37 @@ struct Job: Decodable, Identifiable {
     var adminID: Int!
     var customerID: Int!
     var totalWeight: Int!
-    var squareFeet: Int!
     var costEstimate: Int!
     var timeEstimate: Int!
+    var address1orig: String!
+    var address2orig: String!
+    var address3orig: String!
+    var address1dest: String!
+    var address2dest: String!
+    var address3dest: String!
+    var sqftOrig: Int!
+    var sqftDest: Int!
+    var floorsOrig: Int!
+    var floorsDest: Int!
+    
+    enum CodingKeys: String, CodingKey {
+        case id = "jobID"
+        case adminID = "adminID"
+        case customerID = "customerID"
+        case totalWeight = "totalWeight"
+        case costEstimate = "costEstimate"
+        case timeEstimate = "timeEstimate"
+        case address1orig = "address1orig"
+        case address2orig = "address2orig"
+        case address3orig = "address3orig"
+        case address1dest = "address1dest"
+        case address2dest = "address2dest"
+        case address3dest = "address3dest"
+        case sqftOrig = "sqftOrig"
+        case sqftDest = "sqftDest"
+        case floorsOrig = "floorsOrig"
+        case floorsDest = "floorsDest"
+    }
 }
 
 class JobService: ObservableObject {
@@ -375,6 +403,7 @@ class JobService: ObservableObject {
                     break
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
+                    print(error)
                 }
             } receiveValue: {
                 self.jobs.removeAll()

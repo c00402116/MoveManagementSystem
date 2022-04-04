@@ -17,6 +17,7 @@ struct DetailedEstimates: View {
     @State var sqft: Int = 0
     @State var sqftDest: Int = 0
     @State var distance: Double = 0
+    @State var buttonPush : Int = 0
     
     @AppStorage("address1Detail") var address1Detail: String = ""
     @AppStorage("address2Detail") var address2Detail: String = ""
@@ -63,7 +64,9 @@ struct DetailedEstimates: View {
                         .foregroundColor(Color.white)
                         .padding()
                     Spacer()
-                    Text("")
+                    Text("4:40 - 5:30")
+                        .foregroundColor(Color.white)
+                        .padding()
                 }
                 .background(Color.red)
                 .cornerRadius(8)
@@ -76,6 +79,7 @@ struct DetailedEstimates: View {
                 Spacer()
                 Button(action: {
                     debugPrint("BUTTONHERE")
+                    buttonPush = 1
                     jobService.insertJob(1, customerID, (totalWeightOrigDetail + totalWeightDestDetail), 500, 90, address1Detail, address2Detail, address3Detail, address1DetailDest, address2DetailDest, address3DetailDest, sqft, sqftDest, floorDetail, floorDetailDest)
                 }) {
                     Text("Book this Job")
@@ -86,7 +90,10 @@ struct DetailedEstimates: View {
                 .frame(width: 400, height: 80)
                 .background(Color.blue)
                 .cornerRadius(8)
-                
+                if(buttonPush == 1) {
+                    Text("Job booked")
+                        .foregroundColor(Color.green)
+                }
             }
         }
         .navigationTitle("Estimates")

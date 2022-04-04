@@ -389,7 +389,7 @@ class JobService: ObservableObject {
         
         var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = "Post"
-        let postString = "adminID=\(adminID) & customerID=\(customerID) & totalWeight=\(totalWeight) & costEstimate=\(costEstimate) & timeEstimate=\(timeEstimate) & address1orig=\(address1orig) & address2orig=\(address2orig) & address3orig=\(address3orig) & address1dest=\(address1dest) & address2dest=\(address2dest) & address3dest=\(address3dest) & sqftOrig=\(sqftOrig) & sqftDest=\(sqftDest) & floorsOrig=\(floorsOrig) & floorsDest=\(floorsDest)"
+        let postString = "adminID=\(adminID) & customerID=\(customerID) & totalWeight=\(totalWeight) & costEstimate=\(costEstimate) & timeEstimate=\(timeEstimate) & address1orig=\(address1orig) & address2orig=\(address2orig) & address3orig=\(address3orig) & address1dest=\(address1dest) & address2dest=\(address2dest) & address3dest=\(address3dest) & sqftOrig=\(sqftOrig) & sqftDest=\(sqftDest) & floorsDest=\(floorsDest) & floorsOrig=\(floorsOrig)"
         urlRequest.httpBody = postString.data(using: String.Encoding.utf8)
         
         URLSession.shared
@@ -404,6 +404,7 @@ class JobService: ObservableObject {
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
                     print(error)
+                    //debugPrint("insertion failed")
                 }
             } receiveValue: {
                 self.jobs.removeAll()
@@ -412,6 +413,7 @@ class JobService: ObservableObject {
         if (errorMessage != "") {
             debugPrint(errorMessage)
         }
+        debugPrint("we made it through")
     }
 }
 
